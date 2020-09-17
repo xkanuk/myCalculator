@@ -58,6 +58,32 @@ class MainActivity : AppCompatActivity() {
 
                     tvInput.text = (a.toDouble() - b.toDouble()).toString()
                 }
+                else if (tvValue.contains("+")) {
+                    val splitValue = tvValue.split("+")
+
+                    var a = prefix + splitValue[0]
+                    var b = splitValue[1]
+
+                    tvInput.text = (a.toDouble() + b.toDouble()).toString()
+                }
+                else if (tvValue.contains("*")) {
+                    val splitValue = tvValue.split("*")
+
+                    var a = prefix + splitValue[0]
+                    var b = splitValue[1]
+
+                    tvInput.text = (a.toDouble() * b.toDouble()).toString()
+                }
+                else if (tvValue.contains("/")) {
+                    val splitValue = tvValue.split("/")
+
+                    var a = prefix + splitValue[0]
+                    var b = splitValue[1]
+
+                    tvInput.text = (a.toDouble() / b.toDouble()).toString()
+                }
+      //          tvInput.text = removeTrailingZeros(tvInput.text.toString())
+                tvInput.text = removeZeroAfterDot(tvInput.text.toString())
 
             } catch (e: ArithmeticException) {
                 e.printStackTrace()
@@ -83,5 +109,21 @@ class MainActivity : AppCompatActivity() {
             value.contains("/") || value.contains("*")
                     || value.contains("+") || value.contains("-")
         }
+    }
+
+    private fun removeZeroAfterDot(result: String) : String {
+        if (result.endsWith(".0")) {
+            return result.substring(0,result.length-2)
+        }
+        else return result
+
+    }
+
+    private fun removeTrailingZeros(result: String) : String {
+        var value = result
+        while (value.contains(".") && value.endsWith("0")) {
+            value = value.substring(0, -1)
+        }
+        return value
     }
 }
